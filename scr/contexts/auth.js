@@ -29,10 +29,47 @@ function AuthProvider({ children }){
       setLoadingAuth(false);
     }
   }
+
+  async function signIn(email, password){
+
+    setLoadingAuth(true);
+
+    try{
+      const response = await api.post('/login', {
+        email: email,
+        password: password
+      })
+
+      const { id, name, token } = response.data;
+
+      const data = {
+        id,
+        name,
+        token,
+        email,
+      };
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`; // colocando no axios para enviar junto
+
+      setUser({
+        id,
+        name,
+        email,
+      })
+
+      setLoadingAuth(false);
+
+    }catch(err){
+      console.log("ERRO AO LOGAR ", err);
+      setLoadingAuth(false);
+    }
+
+  }
+
   // isso !! converte em booleano
 
   return(
-    <AuthContext.Provider value={{ signed: !!user, signUp, loadingAuth }}> 
+    <AuthContext.Provider value={{ signed: !!user, signUp, signIn, loadingAuth }}> 
       {children}
     </AuthContext.Provider>
   )
