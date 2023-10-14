@@ -9,7 +9,7 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }){
   const [user, setUser] = useState(null); 
-  const[loadingAuth, setLoadingAuth] = useState(false);
+  const [loadingAuth, setLoadingAuth] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
@@ -99,10 +99,17 @@ function AuthProvider({ children }){
 
   }
 
+  async function signOut(){
+    await AsyncStorage.clear()
+    .then(() => {
+      setUser(null);
+    })
+  }
+
   // isso !! converte em booleano
 
   return(
-    <AuthContext.Provider value={{ signed: !!user, signUp, signIn, loadingAuth }}> 
+    <AuthContext.Provider value={{ signed: !!user, user, signUp, signIn, signOut, loadingAuth }}> 
       {children}
     </AuthContext.Provider>
   )
