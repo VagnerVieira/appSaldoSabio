@@ -29,9 +29,10 @@ function AuthProvider({ children }){
       setLoadingAuth(false);
     }
   }
+  // isso !! converte em booleano
 
   return(
-    <AuthContext.Provider value={{ user, signUp, loadingAuth }}>
+    <AuthContext.Provider value={{ signed: !!user, signUp, loadingAuth }}> 
       {children}
     </AuthContext.Provider>
   )

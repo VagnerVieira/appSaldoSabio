@@ -35,7 +35,7 @@ export default function SignUp(){
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         enabled
       >
-         <TextTitle>Cadastro</TextTitle>
+
          <TextWelcome>Criar uma conta</TextWelcome>
          <Text>Seja bem-vindo(a) à nossa comunidade! 
           Aqui, você está prestes a começar uma jornada de controle financeiro, crescimento pessoal e prosperidade.</Text>
