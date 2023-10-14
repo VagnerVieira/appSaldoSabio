@@ -33,6 +33,7 @@ export const SubmitButton = styled.TouchableOpacity`
   border-radius:8px;
   background-color:#F9CD2F;
   margin-top:20px;
+  margin-bottom:20px;
   align-items: center;
   justify-content:center;
   font-weight: 600;
@@ -42,7 +43,7 @@ export const SubmitText = styled.Text`
   color:#FFF;
 `;
 export const Link = styled.TouchableOpacity`
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom:10px;
 
 `;
@@ -65,7 +66,10 @@ export const Text = styled.Text`
   color: #FFF;
   margin-top: 10px;
   margin-bottom: 30px;
+  padding:10px;
+
 `;
+
 
 export const TextWelcome = styled.Text`
   font-size: 24px;
