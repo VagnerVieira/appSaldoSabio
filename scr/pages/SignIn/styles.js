@@ -96,3 +96,6 @@ export const TextTitle = styled.Text`
   margin-bottom:40px;
   font-weight: 600;
 `;
+export const  ScrollView = styled.TouchableOpacity`
+
+`;

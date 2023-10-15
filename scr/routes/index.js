@@ -7,6 +7,7 @@ import AuthRoutes from './auth.routes';
 import AppRoutes from './app.routes';
 
 
+
 function Routes(){
   const { signed, loading } = useContext(AuthContext);
 
@@ -25,7 +26,7 @@ function Routes(){
   }
 
   return(
-    signed ? <AppRoutes/> : <AuthRoutes/>
+    signed ?  <AppRoutes/>  : <AuthRoutes/>
   )
 }
 

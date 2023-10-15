@@ -11,7 +11,7 @@ import {
   Text,
   TextDescription,
   TextWelcome,
-  TextTitle
+
 
 } from '../SignIn/styles';
 
@@ -30,6 +30,7 @@ export default function SignUp(){
     signUp(email, password, nome);
   }
   return(
+    
     <Background>
       <Container
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
@@ -82,5 +83,6 @@ export default function SignUp(){
       </Container>
 
     </Background>
+   
   )
 }
