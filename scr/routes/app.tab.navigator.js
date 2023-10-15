@@ -6,8 +6,7 @@ import Home from '../pages/Home';
 import Transactions from '../pages/Transactions';
 import Planning from '../pages/Planning';
 import Report from '../pages/Report';
-import New from '../components/New';
-import ButtonNew from '../components/ButtonNew';
+import FabButton from '../components/ButtonNew/FabButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -59,11 +58,12 @@ function AppTabNavigator() {
 
 <Tab.Screen 
   name="Novo" 
-  component={New} 
+  component={FabButton} 
   options={{
     tabBarLabel: '',
     tabBarIcon: ({ focused, size, color }) => (
-      <ButtonNew size={size} color={color} focused={focused} />
+      <FabButton size={size} color={color} focused={focused} 
+      />
     ),
   }}
 />
