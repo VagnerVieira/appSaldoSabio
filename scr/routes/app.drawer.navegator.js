@@ -18,7 +18,7 @@ function AppDrawerNavigator() {
         },
         drawerActiveBackgroundColor: '#0F0F18',
         drawerActiveTintColor: '#FFF',
-        drawerInactiveBackgroundColor: '#F0F2FF',
+        drawerInactiveBackgroundColor: '#0F0F18',
         drawerInactiveTintColor: '#121212',
       }}
     >
