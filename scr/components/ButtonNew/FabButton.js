@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+
+import Transfer from '../../pages/Transfer';
+import Revenue from '../../pages/Revenue';
+import Expenditure from '../../pages/Expenditure';
+import ExpenditureCreditCard from '../../pages/ExpenditureCreditCard';
 
 export default class FabButton extends Component {
   constructor(props) {
@@ -31,7 +36,7 @@ export default class FabButton extends Component {
       focused: this.open,
     }));
   };
-  
+
 
   render() {
     const { size, color, focused } = this.state;
@@ -63,6 +68,32 @@ export default class FabButton extends Component {
         },
       ],
     };
+    const transfer = {
+      transform: [
+        {
+          scale: this.animation,
+        },
+        {
+          translateY: this.animation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -200],
+          }),
+        },
+      ],
+    };
+    const creditCard = {
+      transform: [
+        {
+          scale: this.animation,
+        },
+        {
+          translateY: this.animation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -260],
+          }),
+        },
+      ],
+    };
 
     const rotation = {
       transform: [
@@ -76,16 +107,30 @@ export default class FabButton extends Component {
     };
 
     return (
+      
       <View style={[styles.container]}>
         <TouchableWithoutFeedback onPress={() => alert('CURTIR!')}>
-          <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
-            <AntDesign name="hearto" size={size} color="#FFF" />
+          <Animated.View style={[styles.button, styles.secondary, creditCard]}>
+            <FontAwesome5 name="money-check" size={size} color="#FFF" />
           </Animated.View>
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={() => alert('CAMERA!')}>
+        <TouchableWithoutFeedback onPress={() => alert('CURTIR!')}>
+          <Animated.View style={[styles.button, styles.secondary, transfer]}>
+            <FontAwesome name="exchange" size={size} color="#FFF" />
+          </Animated.View>
+        </TouchableWithoutFeedback>
+
+        
+        <TouchableWithoutFeedback onPress={() => alert('DESPESA!')}>
+          <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
+            <FontAwesome5 name="sort-amount-down-alt" size={size} color="#FFF" />
+          </Animated.View>
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback onPress={() => alert('RECEITA!')}>
           <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
-            <Entypo name="camera" size={size} color="#FFF" />
+            <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
           </Animated.View>
         </TouchableWithoutFeedback>
 
@@ -135,6 +180,6 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 46 / 2,
-    backgroundColor: '#00213B',
+    backgroundColor: '#F9CD2F',
   },
 });
