@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import {AntDesign, Entypo } from '@expo/vector-icons';
 
 export default function ButtonNew({ size, color, focused }) {
   return (
     <View style={[styles.container, { backgroundColor: focused ? '#FF6A46' : '#F9CD2F' }]}>
-      <Entypo name="plus" size={size} color={focused ? '#F9CD2F' : '#00CF7F'} />
+      <Entypo name="plus" size={size} color={focused ? '#F9CD2F' : '#051037'} />
     </View>
   );
 }

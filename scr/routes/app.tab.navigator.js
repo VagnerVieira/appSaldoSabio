@@ -52,7 +52,7 @@ function AppTabNavigator() {
         options={{
           tabBarLabel: 'Transações',
           tabBarIcon: ({ size, color }) => (
-            <Entypo name="home" size={size} color={color} />
+            <Entypo name="list" size={size} color={color} />
           ),
         }}
       />
@@ -74,7 +74,7 @@ function AppTabNavigator() {
         options={{
           tabBarLabel: 'Planejamento',
           tabBarIcon: ({ size, color }) => (
-            <Entypo name="home" size={size} color={color} />
+            <Entypo name="calendar" size={size} color={color} />
           ),
         }}
       />
@@ -85,7 +85,7 @@ function AppTabNavigator() {
         options={{
           tabBarLabel: 'Relatório',
           tabBarIcon: ({ size, color }) => (
-            <Entypo name="home" size={size} color={color} />
+            <Entypo name="bar-graph" size={size} color={color} />
           ),
         }}
       />
