@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated, Modal, TouchableOpacity } from 'react-native';
 import { AntDesign, Entypo, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
-import Transfer from '../../pages/Transfer';
-import Revenue from '../../pages/Revenue';
-import Expenditure from '../../pages/Expenditure';
-import ExpenditureCreditCard from '../../pages/ExpenditureCreditCard';
+import ActionModalRevenue from '../ActionModalRevenue';
 
 export default class FabButton extends Component {
   constructor(props) {
@@ -14,6 +11,7 @@ export default class FabButton extends Component {
       size: props.size,
       color: props.color,
       focused: false, // Inicialmente não focado
+      isRevenueModalVisible: false, 
     };
 
     this.animation = new Animated.Value(0); //
@@ -37,9 +35,17 @@ export default class FabButton extends Component {
     }));
   };
 
+  openRevenueModal = () => {
+    this.setState({ isRevenueModalVisible: true });
+  };
+
+  closeRevenueModal = () => {
+    this.setState({ isRevenueModalVisible: false });
+  };
+
 
   render() {
-    const { size, color, focused } = this.state;
+    const { size, color, focused, isRevenueModalVisible } = this.state;
 
     const pinStyle = {
       transform: [
@@ -107,7 +113,6 @@ export default class FabButton extends Component {
     };
 
     return (
-      
       <View style={[styles.container]}>
         <TouchableWithoutFeedback onPress={() => alert('CURTIR!')}>
           <Animated.View style={[styles.button, styles.secondary, creditCard]}>
@@ -128,11 +133,19 @@ export default class FabButton extends Component {
           </Animated.View>
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={() => alert('RECEITA!')}>
+        <TouchableWithoutFeedback onPress={this.openRevenueModal}>
           <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
             <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
           </Animated.View>
         </TouchableWithoutFeedback>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isRevenueModalVisible}
+          onRequestClose={this.closeRevenueModal}
+        >
+          <ActionModalRevenue handleClose={this.closeRevenueModal} />
+        </Modal>
 
         <TouchableWithoutFeedback onPress={this.toggleMenu}>
           <Animated.View
@@ -160,6 +173,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   button: {
     position: 'absolute',

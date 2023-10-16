@@ -21,15 +21,13 @@ function AppTabNavigator() {
           backgroundColor: '#051037',
           borderTopColor: 'transparent',
         },
-      }}
-      tabBarOptions={{
-        activeTintColor: '#E3B81D',
-        inactiveTintColor: '#FFF',
-        labelStyle: {
+        tabBarActiveTintColor: '#E3B81D',
+        tabBarInactiveTintColor: '#FFF',
+        tabBarLabelStyle: {
           fontSize: 12,
         },
-        tabStyle: {
-          paddingBottom: 5,
+        tabBarTabStyle: {
+          paddingBottom: 10,
           paddingTop: 5,
         },
       }}
@@ -56,17 +54,16 @@ function AppTabNavigator() {
         }}
       />
 
-<Tab.Screen 
-  name="Novo" 
-  component={FabButton} 
-  options={{
-    tabBarLabel: '',
-    tabBarIcon: ({ focused, size, color }) => (
-      <FabButton size={size} color={color} focused={focused} 
+      <Tab.Screen 
+        name="Novo" 
+        component={FabButton} 
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ focused, size, color }) => (
+            <FabButton size={size} color={color} focused={focused} />
+          ),
+        }}
       />
-    ),
-  }}
-/>
       
       <Tab.Screen 
         name="Planning" 
