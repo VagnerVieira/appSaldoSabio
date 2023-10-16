@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, TouchableOpacity, Text, TextInput, StyleSheet, Dimensions, Modal } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-import ActionModalCalculator from '../ActionModalCalculator';
+import ActionModalCalculator from '../ActionModalCalculadora';
 
 const { height } = Dimensions.get('window');
 
