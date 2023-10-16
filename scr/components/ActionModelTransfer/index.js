@@ -6,7 +6,7 @@ import ActionModalCalculator from '../ActionModalCalculator';
 
 const { height } = Dimensions.get('window');
 
-export default function ActionModalRevenue({ handleClose }) {
+export default function ActionModalTransfer({ handleClose }) {
   const [moneyInput, setMoneyInput] = useState('R$ 0.00');
   const [isCalculatorVisible, setCalculatorVisible] = useState(false);
   const [isTextInputEditable, setTextInputEditable] = useState(false);
@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
     top: 8,
     right: 8,
     padding: 8,
-    zIndex: 5, // Ensure the close button is on top
+    zIndex: 5, 
   },
   closeIcon: {
     padding: 2,
     marginTop: 23,
-    marginBottom: 10, // Add margin to the icon
+    marginBottom: 10, 
   },
   content: {
     flex: 1,

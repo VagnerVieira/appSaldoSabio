@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export default function Transfer(){
+export default function NewExpenditure(){
   return(
     <View>
-      <Text>TELA de TRANSFERÊNCIA</Text>
+      <Text>TELA de DESPESA</Text>
     </View>
   )
 }

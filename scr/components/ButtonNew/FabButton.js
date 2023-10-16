@@ -1,168 +1,207 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Animated, Modal, TouchableOpacity } from 'react-native';
-import { AntDesign, Entypo, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated, Modal } from 'react-native';
+import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import ActionModalRevenue from '../ActionModalRevenue';
+import ActionModalExpenditure from '../ActionModelExpenditure';
+import ActionModalExpenditureCreditCard from '../ActionModelExpenditureCreditCard';
+import ActionModalTransfer from '../ActionModelTransfer';
 
-export default class FabButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      size: props.size,
-      color: props.color,
-      focused: false, // Inicialmente não focado
-      isRevenueModalVisible: false, 
-    };
+const FabButton = (props) => {
+  const navigation = useNavigation();
+  const [size, setSize] = useState(props.size);
+  const [color, setColor] = useState(props.color);
+  const [focused, setFocused] = useState(false);
+  const [isRevenueModalVisible, setIsRevenueModalVisible] = useState(false);
+  const [isExpenditureModalVisible, setIsExpenditureModalVisible] = useState(false);
+  const [isExpenditureCreditCardModalVisible, setIsExpenditureCreditCardModalVisible] = useState(false);
+  const [isTransferModalVisible, setIsTransferModalVisible] = useState(false);
 
-    this.animation = new Animated.Value(0); //
-    this.open = false;
-  }
+  const animation = useRef(new Animated.Value(0)).current;
+  const open = useRef(false);
 
-  toggleMenu = () => {
-    const toValue = this.open ? 0 : 1; // clicou vai para o 1
+  const toggleMenu = () => {
+    const toValue = open.current ? 0 : 1;
 
-    Animated.spring(this.animation, {
+    Animated.spring(animation, {
       toValue,
       friction: 6,
-      useNativeDriver: false, 
+      useNativeDriver: false,
     }).start();
 
-    this.open = !this.open; // recolher o botão
+    open.current = !open.current;
 
-    this.setState((prevState) => ({ // Atualizar o estado focused
-      ...prevState,
-      focused: this.open,
-    }));
+    setFocused(open.current);
   };
 
-  openRevenueModal = () => {
-    this.setState({ isRevenueModalVisible: true });
+  const openRevenueModal = () => {
+    setIsRevenueModalVisible(true);
   };
 
-  closeRevenueModal = () => {
-    this.setState({ isRevenueModalVisible: false });
+  const closeRevenueModal = () => {
+    setIsRevenueModalVisible(false);
   };
 
+  const openExpenditureModal = () => {
+    setIsExpenditureModalVisible(true);
+  };
 
-  render() {
-    const { size, color, focused, isRevenueModalVisible } = this.state;
+  const closeExpenditureModal = () => {
+    setIsExpenditureModalVisible(false);
+  };
 
-    const pinStyle = {
-      transform: [
-        {
-          scale: this.animation,
-        },
-        {
-          translateY: this.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -80],
-          }),
-        },
-      ],
-    };
+  const openExpenditureCreditCardModal = () => {
+    setIsExpenditureCreditCardModalVisible(true);
+  };
 
-    const heartStyle = {
-      transform: [
-        {
-          scale: this.animation,
-        },
-        {
-          translateY: this.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -140],
-          }),
-        },
-      ],
-    };
-    const transfer = {
-      transform: [
-        {
-          scale: this.animation,
-        },
-        {
-          translateY: this.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -200],
-          }),
-        },
-      ],
-    };
-    const creditCard = {
-      transform: [
-        {
-          scale: this.animation,
-        },
-        {
-          translateY: this.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -260],
-          }),
-        },
-      ],
-    };
+  const closeExpenditureCreditCardModal = () => {
+    setIsExpenditureCreditCardModalVisible(false);
+  };
 
-    const rotation = {
-      transform: [
-        {
-          rotate: this.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '45deg'],
-          }),
-        },
-      ],
-    };
+  const openTransferModal = () => {
+    setIsTransferModalVisible(true);
+  };
 
-    return (
-      <View style={[styles.container]}>
-        <TouchableWithoutFeedback onPress={() => alert('CURTIR!')}>
-          <Animated.View style={[styles.button, styles.secondary, creditCard]}>
-            <FontAwesome5 name="money-check" size={size} color="#FFF" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
+  const closeTransferModal = () => {
+    setIsTransferModalVisible(false);
+  };
 
-        <TouchableWithoutFeedback onPress={() => alert('CURTIR!')}>
-          <Animated.View style={[styles.button, styles.secondary, transfer]}>
-            <FontAwesome name="exchange" size={size} color="#FFF" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
+  const pinStyle = {
+    transform: [
+      { scale: animation },
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -80],
+        }),
+      },
+    ],
+  };
 
-        
-        <TouchableWithoutFeedback onPress={() => alert('DESPESA!')}>
-          <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
-            <FontAwesome5 name="sort-amount-down-alt" size={size} color="#FFF" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
+  const heartStyle = {
+    transform: [
+      { scale: animation },
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -140],
+        }),
+      },
+    ],
+  };
 
-        <TouchableWithoutFeedback onPress={this.openRevenueModal}>
-          <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
-            <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isRevenueModalVisible}
-          onRequestClose={this.closeRevenueModal}
+  const transfer = {
+    transform: [
+      { scale: animation },
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -200],
+        }),
+      },
+    ],
+  };
+
+  const creditCard = {
+    transform: [
+      { scale: animation },
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -260],
+        }),
+      },
+    ],
+  };
+
+  const rotation = {
+    transform: [
+      {
+        rotate: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '45deg'],
+        }),
+      },
+    ],
+  };
+
+  return (
+    <View style={[styles.container]}>
+      <TouchableWithoutFeedback onPress={openExpenditureCreditCardModal}>
+        <Animated.View style={[styles.button, styles.secondary, creditCard]}>
+          <FontAwesome5 name="money-check" size={size} color="#FFF" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+
+      <TouchableWithoutFeedback onPress={openTransferModal}>
+        <Animated.View style={[styles.button, styles.secondary, transfer]}>
+          <FontAwesome name="exchange" size={size} color="#FFF" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+
+      <TouchableWithoutFeedback onPress={openExpenditureModal}>
+        <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
+          <FontAwesome5 name="sort-amount-down-alt" size={size} color="#FFF" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+
+      <TouchableWithoutFeedback onPress={openRevenueModal}>
+        <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
+          <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isRevenueModalVisible}
+        onRequestClose={closeRevenueModal}
+      >
+        <ActionModalRevenue handleClose={closeRevenueModal} />
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isExpenditureModalVisible}
+        onRequestClose={closeExpenditureModal}
+      >
+        <ActionModalExpenditure handleClose={closeExpenditureModal} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isExpenditureCreditCardModalVisible}
+        onRequestClose={closeExpenditureCreditCardModal}
+      >
+        <ActionModalExpenditureCreditCard handleClose={closeExpenditureCreditCardModal} />
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isTransferModalVisible}
+        onRequestClose={closeTransferModal}
+      >
+        <ActionModalTransfer handleClose={closeTransferModal} />
+      </Modal>
+
+      <TouchableWithoutFeedback onPress={toggleMenu}>
+        <Animated.View
+          style={[
+            styles.button,
+            styles.menu,
+            rotation,
+            { backgroundColor: focused ? '#FF6A46' : '#F9CD2F' },
+          ]}
         >
-          <ActionModalRevenue handleClose={this.closeRevenueModal} />
-        </Modal>
-
-        <TouchableWithoutFeedback onPress={this.toggleMenu}>
-          <Animated.View
-            style={[
-              styles.button,
-              styles.menu,
-              rotation,
-              { backgroundColor: focused ? '#FF6A46' : '#F9CD2F' },
-            ]}
-          >
-            <AntDesign name="plus" size={size} color={focused ? '#F9CD2F' : '#051037'} />
-          </Animated.View>
-        </TouchableWithoutFeedback>
-      </View>
-    );
-  }
-}
+          <AntDesign name="plus" size={size} color={focused ? '#F9CD2F' : '#051037'} />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -200,3 +239,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9CD2F',
   },
 });
+
+export default FabButton;

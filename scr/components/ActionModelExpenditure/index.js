@@ -6,7 +6,7 @@ import ActionModalCalculator from '../ActionModalCalculator';
 
 const { height } = Dimensions.get('window');
 
-export default function ActionModalRevenue({ handleClose }) {
+export default function ActionModalExpenditure({ handleClose }) {
   const [moneyInput, setMoneyInput] = useState('R$ 0.00');
   const [isCalculatorVisible, setCalculatorVisible] = useState(false);
   const [isTextInputEditable, setTextInputEditable] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Feather } from '@expo/vector-icons';  // Certifique-se de importar corretamente
+import { Feather } from '@expo/vector-icons';  
 
 import Home from '../pages/Home';
 import AppTabNavigator from './app.tab.navigator';
