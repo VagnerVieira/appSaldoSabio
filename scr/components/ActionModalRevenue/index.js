@@ -6,7 +6,7 @@ import ActionModalCalculator from '../ActionModalCalculadora';
 
 const { height } = Dimensions.get('window');
 
-export default function ActionModalRevenue({ handleClose }) {
+export default function ActionModalRevenue({ handleClose}) {
   const [moneyInput, setMoneyInput] = useState('R$ 0.00');
   const [isCalculatorVisible, setCalculatorVisible] = useState(false);
   const [isTextInputEditable, setTextInputEditable] = useState(false);
@@ -18,7 +18,12 @@ export default function ActionModalRevenue({ handleClose }) {
   const closeCalculatorModal = () => {
     setCalculatorVisible(false);
   };
-
+  const handleConfirmExpression = (value) => {
+    setMoneyInput(value);
+    setTextInputEditable(false);
+    closeCalculatorModal();
+    console.log('Valor Money:', value);
+  };
   const handleMoneyInputChange = (text) => {
     setMoneyInput(text);
   };
@@ -53,15 +58,20 @@ export default function ActionModalRevenue({ handleClose }) {
           </TouchableOpacity>
         </View>
       </View>
-
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isCalculatorVisible}
-        onRequestClose={closeCalculatorModal}
-      >
-        <ActionModalCalculator handleClose={() => { setTextInputEditable(false); closeCalculatorModal(); }} />
-      </Modal>
+  animationType="slide"
+  transparent={true}
+  visible={isCalculatorVisible}
+  onRequestClose={closeCalculatorModal}
+>
+  <ActionModalCalculator
+    handleClose={(value) => {
+      setTextInputEditable(false);
+      closeCalculatorModal();
+      handleConfirmExpression(value); // Correção aqui
+    }}
+  />
+</Modal>
     </SafeAreaView>
   );
 }
