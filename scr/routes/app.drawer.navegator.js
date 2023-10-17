@@ -1,8 +1,8 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Feather } from '@expo/vector-icons';  
+import {AntDesign, Feather } from '@expo/vector-icons';  
 
-import Home from '../pages/Home';
+import AppStackNavigator from './app.stack.navegator';
 import AppTabNavigator from './app.tab.navigator';
 
 const AppDrawer = createDrawerNavigator();
@@ -18,7 +18,7 @@ function AppDrawerNavigator() {
         },
         drawerActiveBackgroundColor: '#0F0F18',
         drawerActiveTintColor: '#FFF',
-        drawerInactiveBackgroundColor: '#0F0F18',
+        drawerInactiveBackgroundColor: '#F9CD2F',
         drawerInactiveTintColor: '#121212',
       }}
     >
@@ -26,9 +26,20 @@ function AppDrawerNavigator() {
         name="Home"
         component={AppTabNavigator}
         options={{
-          drawerIcon: ({ color, size }) => <Feather name="home" color={color} size={size} />,
+          drawerIcon: ({ color, size }) => 
+          <Feather name="home" color={color} size={size} />,
           drawerLabel: "Home",
         }}
+      />
+      <AppDrawer.Screen
+        name="Categorias"
+        component={AppStackNavigator}
+        options={{
+        drawerIcon: ({ color, size }) => (
+        <AntDesign name="profile" color={color} size={size} />
+        ),
+        drawerLabel: "Categorias",
+       }}
       />
     </AppDrawer.Navigator>
   );
