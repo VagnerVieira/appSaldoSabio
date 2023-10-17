@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; // Certifique-se de ter o pacote expo-vector-icons instalado
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 const { height } = Dimensions.get('window');
 
@@ -26,26 +26,23 @@ export default function ActionModalCalculator({ handleClose }) {
   };
   const handleCancel = () => {
     setExpression('');
-    handleClose('R$ 0.00');
+    handleClose('0.00');
   };
 
   const handleConfirmExpression = () => {
     if (expression.trim() !== '') {
-      const formattedValue = `R$ ${expression}`;
-      console.log('Valor:', formattedValue);
-      handleClose(formattedValue);
+      handleClose(expression);
     } else {
-      handleClose('R$ 0.00');
+      handleClose('0.00');
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.overlay} onPress={handleClose}></TouchableOpacity>
       <View style={styles.modal}>
         <View style={styles.displayContainer}>
           <Text style={styles.expression}>
-            {expression}
+             {expression}
 
             <TouchableOpacity onPress={handleBackspace}>
             <MaterialIcons name="backspace" size={24} color="#FFF" style={styles.buttonClen} />

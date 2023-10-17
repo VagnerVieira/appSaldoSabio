@@ -48,9 +48,7 @@ export default function ActionModalExpenditureCreditCard({ handleClose }) {
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.actionButton} onPress={() => {}}>
-            <View style={styles.containerView}></View>
-          </TouchableOpacity>
+         
         </View>
       </View>
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Animated, Modal } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated, Modal, Text } from 'react-native';
 import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -129,27 +129,28 @@ const FabButton = (props) => {
   return (
     <View style={[styles.container]}>
       <TouchableWithoutFeedback onPress={openExpenditureCreditCardModal}>
-        <Animated.View style={[styles.button, styles.secondary, creditCard]}>
-          <FontAwesome5 name="money-check" size={size} color="#FFF" />
-        </Animated.View>
+      <Animated.View style={[styles.button, styles.secondary, styles.button1, creditCard]}>
+       <FontAwesome5 name="money-check" size={size} color="#FFF" />
+      </Animated.View>
+      
       </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback onPress={openTransferModal}>
-        <Animated.View style={[styles.button, styles.secondary, transfer]}>
-          <FontAwesome name="exchange" size={size} color="#FFF" />
-        </Animated.View>
+      <Animated.View style={[styles.button, styles.secondary, styles.button2, transfer]}>
+      <FontAwesome name="exchange" size={size} color="#FFF" />
+      </Animated.View>
       </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback onPress={openExpenditureModal}>
-        <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
-          <FontAwesome5 name="sort-amount-down-alt" size={size} color="#FFF" />
-        </Animated.View>
+      <Animated.View style={[styles.button, styles.secondary, styles.button3, heartStyle]}>
+       <FontAwesome5 name="sort-amount-down-alt" size={size} color="#FFF" />
+      </Animated.View>
       </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback onPress={openRevenueModal}>
-        <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
-          <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
-        </Animated.View>
+      <Animated.View style={[styles.button, styles.secondary, styles.button4, pinStyle]}>
+      <FontAwesome5 name="sort-amount-up-alt" size={size} color="#FFF" />
+      </Animated.View>
       </TouchableWithoutFeedback>
 
       <Modal
@@ -238,6 +239,22 @@ const styles = StyleSheet.create({
     borderRadius: 46 / 2,
     backgroundColor: '#F9CD2F',
   },
+  button1: {
+    backgroundColor: '#F9CD2F', 
+  },
+
+  button2: {
+    backgroundColor: '#314BCE',
+  },
+
+  button3: {
+    backgroundColor: '#FF6A46', 
+  },
+
+  button4: {
+    backgroundColor: '#0A8354', 
+  },
+ 
 });
 
 export default FabButton;
