@@ -1,29 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header';
-import { Background, ListBalance } from './styles';
+import { Background, ListBalance, Area, Title, List } from './styles';
 import api from '../../services/api';
 import { format } from 'date-fns';
-
 import { useIsFocused } from '@react-navigation/native';
 import BalanceItem from '../../components/BalanceItem';
+import HistoricoList from '../../components/HistoricoList';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Home() {
-  const {signOut, user } = useContext(AuthContext);
-  const isFocused = useIsFocused(); // garantir o foco na tela
+  const isFocused = useIsFocused();
   const [listBalance, setListBalance] = useState([]);
-  const [dateMovements, setDateMovements] = useState(new Date()); //pegar a data de hoje
+  const [movements, setMovements] = useState([]);
+  const [dateMovements, setDateMovements] = useState(new Date());
 
   useEffect(() => {
-    console.log('Home component rendered');
     let isActive = true;
 
     async function getMovements() {
-      let dateFormated = format(dateMovements, 'dd/MM/yyyy'); //formatando a data
-
+      console.log('Componente Home renderizado');
       try {
+        let dateFormated = format(dateMovements, 'dd/MM/yyyy');
+
+        const receives = await api.get('/receives', {
+          params: {
+            date: dateFormated,
+          },
+        });
+
         const balance = await api.get('/balance', {
           params: {
             date: dateFormated,
@@ -31,37 +38,47 @@ export default function Home() {
         });
 
         if (isActive) {
-          setListBalance(balance.data); // se está ativo passar o balance
-          console.log('List Balance:', balance.data);
+          setMovements(receives.data);
+          setListBalance(balance.data);
+          console.log('Receives Data:', receives.data);
+          console.log('Balance Data:', balance.data);
         }
       } catch (error) {
-        console.error('Error fetching balance:', error);
+        console.error('Error fetching data:', error);
       }
     }
 
     getMovements();
 
-    return () => {
-      isActive = false;
-    };
-  }, [isFocused]); // quando sair da tela é desmontado para não perder performace
+    return () => (isActive = false);
+  }, [isFocused, dateMovements]);
 
   return (
     <Background>
-      <Header title= {user.name} />
-      
-       <ListBalance
+      <Header title="Minhas movimentações" />
+
+      <ListBalance
         data={listBalance}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={ item => item.tag }
-        renderItem={ ({ item }) => ( <BalanceItem data={item} /> )}
+        keyExtractor={(item) => item.tag}
+        renderItem={({ item }) => <BalanceItem data={item} />}
       />
 
-       <View> 
-        <Button title ="Sair"
-        onPress={() => signOut()}/>
-      </View>
-     </Background>
+      <Area>
+        <TouchableOpacity>
+          <Icon name="event" color="#121212" size={30} />
+        </TouchableOpacity>
+        <Title>Ultimas movimentações</Title>
+      </Area>
+
+      <List
+        data={movements}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <HistoricoList data={item} />}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      />
+    </Background>
   );
 }

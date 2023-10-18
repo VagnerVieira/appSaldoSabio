@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Container, TipoText} from './styles';
 
-export default function Category(){
+export default function HistoricoList(){
   return(
-    <View>
-      <Text>CATEGORIAS</Text>
-    </View>
+    <Container>
+      <TipoText> TESTE TIPO </TipoText>
+    </Container>
   )
 }

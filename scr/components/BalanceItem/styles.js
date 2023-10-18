@@ -11,7 +11,6 @@ export const Container = styled.View`
   align-items: flex-start;
   width: 300px;
   padding-left: 14px;
-  //margin-top: ${props => (props.marginTop ? `${props.marginTop}px` : '0')};
 
 `;
 
