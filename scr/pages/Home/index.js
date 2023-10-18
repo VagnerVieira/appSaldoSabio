@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Home() {
   const isFocused = useIsFocused();
+  const { user} = useContext(AuthContext);
   const [listBalance, setListBalance] = useState([]);
   const [movements, setMovements] = useState([]);
   const [dateMovements, setDateMovements] = useState(new Date());
@@ -70,7 +71,7 @@ export default function Home() {
 
   return (
     <Background>
-      <Header title="Minhas movimentações" />
+      <Header title={user.name} numberOfLines={1}/>
 
       <ListBalance
         data={listBalance}
