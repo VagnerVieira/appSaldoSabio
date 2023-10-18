@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  background-color: #F0F3FF;
+  background-color: #191B1E;
   border-radius: 4px;
   margin-left: 10px;
   margin-right: 10px;
@@ -31,6 +31,17 @@ export const IconView = styled.View`
 `;
 
 export const ValorText = styled.Text`
-  color: #121212;
+  color: ${props => props.tipo === 'despesa' ? '#c62c36' : '#049301'};
   font-size: 22px;
+  margin-right:20px;
+  margin-top:-2px;
+  align-self: flex-end;
+  
 `;
+export const Text = styled.Text`
+  color: #F9CD2F;
+  font-size: 18px;
+  margin-top:-20px;
+  margin-left:8px;
+`;
+

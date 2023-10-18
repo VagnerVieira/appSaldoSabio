@@ -4,7 +4,8 @@ import {
   TipoText,
   Tipo,
   IconView,
-  ValorText
+  ValorText, 
+  Text
 } from './styles';
 
 import Icon from 'react-native-vector-icons/Feather'
@@ -14,7 +15,7 @@ export default function HistoricoList({ data }) {
     return null; 
   }
 
-  const { type, value } = data;
+  const { type, value,  description } = data;
 
   return (
     <Container>
@@ -28,10 +29,12 @@ export default function HistoricoList({ data }) {
           <TipoText>{type}</TipoText>
         </IconView>
       </Tipo>
-
       <ValorText>
         R$ {value}
       </ValorText>
+      <Text>
+       {description}
+      </Text>
     </Container>
   );
 }

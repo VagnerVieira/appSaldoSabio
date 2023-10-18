@@ -67,7 +67,7 @@ export default function Home() {
 
       <Area>
         <TouchableOpacity>
-          <Icon name="event" color="#121212" size={30} />
+          <Icon name="event" color="#FFF" size={30} />
         </TouchableOpacity>
         <Title>Ultimas movimentações</Title>
       </Area>

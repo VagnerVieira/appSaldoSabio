@@ -1,10 +1,10 @@
 import React from 'react';
 import {Container, TipoText} from './styles';
 
-export default function HistoricoList(){
+export default function Category(){
   return(
     <Container>
-      <TipoText> TESTE TIPO </TipoText>
+      <TipoText> Categorias </TipoText>
     </Container>
   )
 }
