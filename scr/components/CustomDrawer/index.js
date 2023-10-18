@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { View, Text, Image } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { DrawerItemList, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
@@ -31,11 +32,14 @@ export default function CustomDrawer(props){
 
       <DrawerItemList {...props} />
 
-      {/* <DrawerItem
+      <DrawerItem
         {...props}
         label="Sair"
-        onPress={ () => signOut() }
-      /> */}
+        onPress={() => signOut()}
+        icon={({ color, size }) => <AntDesign name="logout" size={size} color={color} />}
+      />
+    
+
     </DrawerContentScrollView>
   )
 }

@@ -1,24 +1,16 @@
-import React, { useContext } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { AntDesign, Feather } from '@expo/vector-icons';  
-import { AuthContext } from '../../scr/contexts/auth';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import CustomDrawer from '../components/CustomDrawer';
 import AppStackNavigator from './app.stack.navegator';
 import AppTabNavigator from './app.tab.navigator';
 
 const AppDrawer = createDrawerNavigator();
 
-function AppDrawerNavigator({ navigation }) {
-  const { user, signOut } = useContext(AuthContext);
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
+function AppDrawerNavigator() {
   return (
     <AppDrawer.Navigator
-      drawerContent={(props) => <CustomDrawer {...props}/>}
+      drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
         drawerStyle: {
@@ -31,7 +23,7 @@ function AppDrawerNavigator({ navigation }) {
         drawerInactiveTintColor: '#121212',
       }}
     >
-    
+
       <AppDrawer.Screen
         name="Home"
         component={AppTabNavigator}
@@ -52,34 +44,6 @@ function AppDrawerNavigator({ navigation }) {
           drawerLabel: "Categorias",
         }}
       />
-
-     
-      <AppDrawer.Screen
-        name="SignOut"
-        options={{
-          drawerLabel: 'Sair',
-          drawerIcon: ({ color, size }) => (
-            <AntDesign name="logout" size={size} color={color} />
-          ),
-        }}
-      >
-        {() => (
-          <TouchableOpacity
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderTopWidth: 1,
-              borderTopColor: '#ccc',
-              padding: 10,
-            }}
-            onPress={handleSignOut}
-          >
-           
-            <AntDesign name="logout" size={24} color="#FF0000" />
-            <Text>Sair</Text>
-          </TouchableOpacity>
-        )}
-      </AppDrawer.Screen>
     </AppDrawer.Navigator>
   );
 }
