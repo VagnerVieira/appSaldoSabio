@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Modal } from 'react-native';
 
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header';
-import { Background, ListBalance, Area, Title, List } from './styles';
+import { Background, 
+  ListBalance, 
+  Area, 
+  Title,
+  List } from './styles';
 import api from '../../services/api';
 import { format } from 'date-fns';
 import { useIsFocused } from '@react-navigation/native';
 import BalanceItem from '../../components/BalanceItem';
 import HistoricoList from '../../components/HistoricoList';
+import CalendarModal from '../../components/CalendarModal';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Home() {
@@ -16,6 +21,7 @@ export default function Home() {
   const { user} = useContext(AuthContext);
   const [listBalance, setListBalance] = useState([]);
   const [movements, setMovements] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const [dateMovements, setDateMovements] = useState(new Date());
 
   useEffect(() => {
@@ -67,6 +73,10 @@ export default function Home() {
       console.log(err);
     }
   }
+  function filterDateMovements(dateSelected){
+     console.log(dateSelected);
+    setDateMovements(dateSelected);
+  }
 
 
   return (
@@ -82,7 +92,7 @@ export default function Home() {
       />
 
       <Area>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={ () => setModalVisible(true)}>
           <Icon name="event" color="#FFF" size={30} />
         </TouchableOpacity>
         <Title>Ultimas movimentações</Title>
@@ -95,6 +105,13 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
+
+      <Modal visible={modalVisible} animationType="fade" transparent={true}>
+        <CalendarModal
+          setVisible={ () => setModalVisible(false) }
+          handleFilter={filterDateMovements}
+        />
+      </Modal>
     </Background>
   );
 }
