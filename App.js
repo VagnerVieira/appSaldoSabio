@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -18,3 +19,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Routes from './scr/routes/index';
+import AuthProvider from './scr/contexts/auth';
+
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AuthProvider>
+      <StatusBar style="light" backgroundColor='#051037' barStyle="light-content"/>
+      <Routes/>
+      </AuthProvider>
+    </NavigationContainer>
+  );
+}
+
+
