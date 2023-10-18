@@ -8,13 +8,13 @@ export const Container = styled.View`
 export const ModalContent = styled.View`
   flex:2;
   justify-content: center;
-  background-color: #FFF;
+  background-color: #051037;
   padding: 14px;
 `;
 
 export const ButtonFilter = styled.TouchableOpacity`
   border-radius: 4px;
-  background-color: #3B3DBF;
+  background-color: #F9CD2F;
   height: 45px;
   align-items: center;
   justify-content: center;

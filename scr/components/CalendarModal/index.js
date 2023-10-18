@@ -25,7 +25,7 @@ export default function CalendarModal({ setVisible, handleFilter }){
 
     markedDay[date.dateString] = {
       selected: true,
-      selectedColor: '#3b3dbf',
+      selectedColor: '#0A8354',
       textColor: '#FFF'
     }
 
